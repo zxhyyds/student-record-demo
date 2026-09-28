@@ -1,0 +1,120 @@
+:root {
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", Arial, sans-serif;
+  color: #292929;
+  background: #f5f7f6;
+  font-synthesis: none;
+  -webkit-text-size-adjust: 100%;
+  --green: #23b58d;
+  --page-gutter: 4.3%;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 3px solid #126752; outline-offset: 4px; }
+.page { max-width: 520px; min-height: 100svh; margin: 0 auto; background: #fff; }
+
+.page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+  padding: 12px 54px 11px;
+  background: #f2f3f3;
+  border-bottom: 3px solid #22bd91;
+}
+.page-heading { text-align: center; }
+.page-heading h1 { margin: 0; font-size: 19px; font-weight: 500; line-height: 1.4; }
+.page-heading p { margin: 1px 0 0; color: #737773; font-size: 12px; line-height: 1.5; }
+.about-button { position: absolute; right: 10px; top: 13px; display: grid; place-items: center; width: 44px; height: 44px; padding: 10px; border: 0; border-radius: 8px; background: transparent; color: #292929; }
+.about-button svg { width: 24px; fill: currentColor; }
+
+.student-card {
+  margin: 0 var(--page-gutter);
+  padding: 16px 4.7% 18px;
+  color: #f3fffa;
+  background: linear-gradient(160deg, #1bac85 0%, #36c69a 100%);
+  border-radius: 0 0 7px 7px;
+  box-shadow: 0 6px 12px #1cb88c26;
+}
+.profile-row { display: flex; align-items: flex-start; gap: 14px; }
+.photos { display: flex; flex: 0 0 auto; gap: 13px; }
+.photo-item { width: 54px; margin: 0; text-align: center; }
+.photo-frame { width: 54px; height: 74px; overflow: hidden; border: 1px solid #dcece3; border-radius: 7px; background: #eee; }
+.photo-frame svg { width: 100%; height: 100%; fill: #d9d9d9; }
+.admission-photo { background: #f8fbfa; }
+.admission-photo svg { fill: #c4d8d0; }
+.photo-item figcaption { margin-top: 5px; color: #e0f5eb; font-size: 12px; line-height: 1.5; white-space: nowrap; }
+.identity { min-width: 0; padding-top: 7px; }
+.identity h2 { margin: 0; font-size: 19px; line-height: 1.5; font-weight: 400; }
+.identity p { display: flex; align-items: baseline; flex-wrap: wrap; gap: 3px 12px; margin: 3px 0 0; font-size: 14px; line-height: 1.65; }
+.identity time { white-space: nowrap; }
+.education { margin-top: 18px; }
+.school-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.school-row h3 { margin: 0; font-size: 22px; line-height: 1.5; font-weight: 400; }
+.degree { padding: 3px 9px; border-radius: 20px; background: #0a9c7452; font-size: 14px; line-height: 1.4; white-space: nowrap; }
+.major-row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; margin: 9px 0 0; font-size: 15px; line-height: 1.6; }
+.study-mode { border-left: 1px solid #d1f1e6; padding-left: 16px; }
+
+.details { margin: 23px var(--page-gutter) 0; }
+.details dl { margin: 0; }
+.detail-row { display: grid; grid-template-columns: 35.5% minmax(0, 1fr); column-gap: 6%; align-items: baseline; min-height: 38px; padding: 7px 0; font-size: 16px; line-height: 1.5; }
+.detail-row dt { color: #999c99; text-align: right; }
+.detail-row dd { min-width: 0; margin: 0; overflow-wrap: anywhere; }
+.id-number { letter-spacing: .25px; }
+.report-action { margin: 25px var(--page-gutter) 0; padding-bottom: max(17px, env(safe-area-inset-bottom)); }
+.report-button { display: block; width: 100%; min-height: 52px; padding: 11px 8px; border: 0; border-radius: 2px; background: var(--green); color: #fff; font-size: 20px; line-height: 1.5; }
+.report-button:active { background: #199d7b; }
+.demo-note { margin: 12px 0 0; text-align: center; font-size: 12px; line-height: 1.5; color: #7e8782; }
+.noscript-note { font-size: 14px; color: #606863; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.info-dialog { width: min(350px, calc(100% - 36px)); max-height: calc(100dvh - 48px); padding: 0; border: 0; border-radius: 14px; color: #292929; background: #fff; box-shadow: 0 14px 70px #0003; }
+.info-dialog::backdrop { background: #142a2359; }
+.dialog-content { padding: 25px 24px 20px; }
+.dialog-tag { color: #178767; font-size: 13px; }
+.dialog-content h2 { margin: 9px 0 14px; font-size: 22px; font-weight: 500; }
+.dialog-content p { margin: 10px 0; color: #636b67; font-size: 15px; line-height: 1.8; }
+.official-link { display: inline-block; padding: 9px 0; color: #117858; font-size: 15px; text-underline-offset: 4px; }
+.dialog-close { width: 100%; min-height: 44px; margin-top: 18px; border: 0; border-radius: 5px; background: var(--green); color: #fff; font-size: 16px; }
+body.dialog-open { overflow: hidden; }
+
+@media (max-width: 400px) {
+  .student-card { padding-top: 14px; padding-bottom: 16px; }
+  .profile-row { gap: 12px; }
+  .photos { gap: 12px; }
+  .photo-item, .photo-frame { width: 49px; }
+  .photo-frame { height: 67px; }
+  .photo-item figcaption { font-size: 11px; }
+  .identity h2 { font-size: 18px; }
+  .identity p { gap: 3px 10px; font-size: 13px; }
+  .education { margin-top: 16px; }
+  .school-row h3 { font-size: 21px; }
+  .degree { font-size: 13px; }
+  .major-row { font-size: 14px; }
+  .detail-row { min-height: 35px; font-size: 14px; }
+  .report-button { min-height: 48px; font-size: 18px; }
+}
+
+@media (max-width: 350px) {
+  .profile-row { gap: 10px; }
+  .photos { gap: 8px; }
+  .photo-item, .photo-frame { width: 42px; }
+  .photo-frame { height: 58px; }
+  .identity { padding-top: 2px; }
+  .identity p { gap: 2px 8px; font-size: 12px; }
+  .school-row h3 { font-size: 20px; }
+  .degree { padding-inline: 7px; font-size: 12px; }
+  .major-row { column-gap: 12px; }
+  .study-mode { padding-left: 12px; }
+  .detail-row { grid-template-columns: 35% minmax(0, 1fr); column-gap: 5%; }
+}
+
+@media (min-width: 600px) {
+  body { padding: 30px 0; }
+  .page { min-height: auto; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 50px #1c4e2e0d; }
+  .student-card { margin-top: 18px; border-radius: 7px; }
+}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#20b58e">
+  <meta name="description" content="手机端学籍档案界面演示。非官方网站，展示内容不作为学籍或学历证明。">
+  <meta name="robots" content="noindex, nofollow">
+  <title>学籍档案 · 非官方演示</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <div class="page-heading">
+        <h1>学籍档案</h1>
+        <p>非官方演示页面</p>
+      </div>
+      <button class="about-button" type="button" aria-label="关于此演示页面" data-open-info>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
+      </button>
+    </header>
+
+    <main id="main-content">
+      <section class="student-card" aria-label="学籍概览，演示资料">
+        <div class="profile-row">
+          <div class="photos">
+            <figure class="photo-item">
+              <div class="photo-frame admission-photo" role="img" aria-label="录取照片占位图">
+                <svg viewBox="0 0 54 74" aria-hidden="true"><circle cx="27" cy="27" r="12"/><path d="M7 64v-5c0-11 9-18 20-18s20 7 20 18v5Z"/></svg>
+              </div>
+              <figcaption>录取照片</figcaption>
+            </figure>
+            <figure class="photo-item">
+              <div class="photo-frame" role="img" aria-label="学历照片占位图">
+                <svg viewBox="0 0 54 74" aria-hidden="true"><circle cx="27" cy="27" r="12"/><path d="M7 64v-5c0-11 9-18 20-18s20 7 20 18v5Z"/></svg>
+              </div>
+              <figcaption>学历照片</figcaption>
+            </figure>
+          </div>
+          <div class="identity">
+            <h2>示例同学</h2>
+            <p><span>男</span><time datetime="2000-01-01">2000年01月01日</time></p>
+          </div>
+        </div>
+        <div class="education">
+          <div class="school-row">
+            <h3>浙江大学</h3>
+            <span class="degree">硕士研究生</span>
+          </div>
+          <p class="major-row"><span>计算机科学与技术</span><span class="study-mode">全日制</span></p>
+        </div>
+      </section>
+
+      <section class="details" aria-label="学籍详细信息，演示资料">
+        <dl>
+          <div class="detail-row"><dt>民族</dt><dd>汉族</dd></div>
+          <div class="detail-row"><dt>证件号码</dt><dd class="id-number" aria-label="证件号码已隐藏">******************</dd></div>
+          <div class="detail-row"><dt>学制</dt><dd>3 年</dd></div>
+          <div class="detail-row"><dt>学历类别</dt><dd>普通高等教育</dd></div>
+          <div class="detail-row"><dt>分院</dt><dd>计算机科学与技术学院</dd></div>
+          <div class="detail-row"><dt>系所</dt><dd>21</dd></div>
+          <div class="detail-row"><dt>班级</dt><dd><span class="sr-only">未填写</span></dd></div>
+          <div class="detail-row"><dt>学号</dt><dd>20240001</dd></div>
+          <div class="detail-row"><dt>入学日期</dt><dd><time datetime="2024-09-06">2024年09月06日</time></dd></div>
+          <div class="detail-row"><dt>学籍状态</dt><dd>在籍（注册学籍）</dd></div>
+          <div class="detail-row"><dt>预计毕业日期</dt><dd><time datetime="2027-06-30">2027年06月30日</time></dd></div>
+        </dl>
+      </section>
+
+      <div class="report-action">
+        <button class="report-button" type="button" data-open-info>查看验证报告</button>
+        <p class="demo-note">仅供界面演示，不作为学籍或学历证明</p>
+        <noscript><p class="noscript-note">本页为非官方演示，没有可供查询的验证报告。</p></noscript>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="info-dialog" id="info-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <div class="dialog-content">
+      <span class="dialog-tag">非官方演示</span>
+      <h2 id="dialog-title">验证报告说明</h2>
+      <p id="dialog-description">本页面仅演示学籍档案的界面，展示的是示例资料，未连接学信网或学校系统，也没有真实的验证报告。</p>
+      <p>如需查询本人学籍或获取正式报告，请访问学信网。</p>
+      <a class="official-link" href="https://www.chsi.com.cn/" target="_blank" rel="noopener noreferrer">前往学信网官网 <span aria-hidden="true">↗</span></a>
+      <form method="dialog"><button class="dialog-close" autofocus>知道了</button></form>
+    </div>
+  </dialog>
+</body>
+</html>
