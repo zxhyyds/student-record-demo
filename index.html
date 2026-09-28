@@ -8,13 +8,13 @@
   <meta name="robots" content="noindex, nofollow">
   <title>学籍档案 · 非官方演示</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css?v=2">
-  <script src="./app.js?v=2" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=3">
+  <script src="./app.js?v=3" defer></script>
 </head>
 <body>
   <div class="page">
     <header class="page-header">
-      <button class="edit-button" id="open-editor" type="button">编辑</button>
+      <button class="edit-button" id="open-editor" type="button" hidden>编辑</button>
       <div class="page-heading">
         <h1 data-field="title">学籍档案</h1>
         <p>非官方演示页面</p>
@@ -108,6 +108,8 @@
         <div class="reset-section"><button class="reset-button" type="button" id="reset-draft">恢复初始内容</button><p class="field-hint">点击保存后生效；取消可保留原来的内容。</p></div>
       </div>
       <footer class="editor-footer">
+        <label class="hide-editor-option"><input type="checkbox" id="hide-editor-entry" aria-describedby="hide-editor-help"><span>保存后隐藏“编辑”按钮</span></label>
+        <p class="hide-editor-help" id="hide-editor-help">再次编辑：右上角 ⋯ → 编辑页面。</p>
         <p id="editor-status" role="status" aria-live="polite">修改后点击“保存并展示”。</p>
         <div class="editor-actions"><button class="cancel-button" type="button" data-cancel-edit>取消</button><button class="save-button" type="submit" id="save-edit">保存并展示</button></div>
       </footer>
@@ -122,6 +124,7 @@
       <p id="dialog-description">本页面仅演示学籍档案的界面，展示的是示例资料，未连接学信网或学校系统，也没有真实的验证报告。</p>
       <p>如需查询本人学籍或获取正式报告，请访问学信网。</p>
       <a class="official-link" href="https://www.chsi.com.cn/" target="_blank" rel="noopener noreferrer">前往学信网官网 <span aria-hidden="true">↗</span></a>
+      <button class="edit-from-info" type="button" id="edit-from-info">编辑页面</button>
       <form method="dialog"><button class="dialog-close" autofocus>知道了</button></form>
     </div>
   </dialog>

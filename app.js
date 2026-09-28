@@ -8,6 +8,7 @@ const editorFields = document.querySelector("#editor-fields");
 const editorStatus = document.querySelector("#editor-status");
 const saveButton = document.querySelector("#save-edit");
 const openEditorButton = document.querySelector("#open-editor");
+const hideEditorCheckbox = document.querySelector("#hide-editor-entry");
 const photoSlots = ["admission", "graduation"];
 const textNodes = [...document.querySelectorAll("[data-field]")];
 const limits = Object.fromEntries(textNodes.map((node) => [node.dataset.field,
@@ -16,6 +17,7 @@ const defaults = {
   version: 1,
   text: Object.fromEntries(textNodes.map((node) => [node.dataset.field, node.textContent])),
   photos: { admission: "", graduation: "" },
+  ui: { hideEditor: false },
 };
 const placeholders = Object.fromEntries(photoSlots.map((slot) => [slot,
   document.querySelector(`[data-photo="${slot}"] svg`).cloneNode(true)]));
@@ -38,6 +40,7 @@ function notify(message) {
 function validateStored(data) {
   if (!data || data.version !== 1 || !data.text || !data.photos) throw new Error("Invalid saved data");
   const result = clone(defaults);
+  result.ui.hideEditor = data.ui?.hideEditor === true;
   for (const key of Object.keys(defaults.text)) {
     if (typeof data.text[key] !== "string" || data.text[key].length > limits[key]) throw new Error("Invalid text");
     result.text[key] = data.text[key];
@@ -67,6 +70,7 @@ function paintPhoto(container, source, label, placeholder) {
 }
 
 function renderPage() {
+  openEditorButton.hidden = current.ui.hideEditor;
   textNodes.forEach((node) => { node.textContent = current.text[node.dataset.field]; });
   document.title = `${current.text.title || "学籍档案"} · 非官方演示`;
   photoSlots.forEach((slot) => {
@@ -163,17 +167,24 @@ function renderPhotoPreviews() {
   saveButton.disabled = pendingUploads.size > 0;
 }
 
-openEditorButton.addEventListener("click", () => {
+function openEditor() {
   draft = clone(current);
   pendingUploads = new Map();
   photoMessages = new Map();
   form.reset();
+  hideEditorCheckbox.checked = draft.ui.hideEditor;
   renderEditorFields();
   renderPhotoPreviews();
   setEditorStatus("修改后点击“保存并展示”。");
   editor.showModal();
   document.body.classList.add("dialog-open");
   document.querySelector(".editor-body").scrollTop = 0;
+}
+openEditorButton.addEventListener("click", openEditor);
+document.querySelector("#edit-from-info").addEventListener("click", () => {
+  // Wait until the first modal has completed its close/focus lifecycle.
+  infoDialog.addEventListener("close", openEditor, { once: true });
+  infoDialog.close();
 });
 
 function discardDraft() {
@@ -186,8 +197,11 @@ editor.addEventListener("cancel", (event) => { event.preventDefault(); discardDr
 editor.addEventListener("close", () => {
   draft = null;
   pendingUploads.clear();
-  document.body.classList.remove("dialog-open");
-  openEditorButton.focus({ preventScroll: true });
+  if (!infoDialog.open && !editor.open) {
+    document.body.classList.remove("dialog-open");
+    const focusTarget = openEditorButton.hidden ? document.querySelector(".about-button") : openEditorButton;
+    focusTarget.focus({ preventScroll: true });
+  }
 });
 
 async function preparePhoto(file) {
@@ -268,6 +282,7 @@ document.querySelector("#reset-draft").addEventListener("click", () => {
   pendingUploads.clear();
   photoMessages.clear();
   form.reset();
+  hideEditorCheckbox.checked = draft.ui.hideEditor;
   renderEditorFields();
   renderPhotoPreviews();
   setEditorStatus("已恢复初始内容，点击保存后生效。取消可放弃这次恢复。");
@@ -278,6 +293,7 @@ form.addEventListener("submit", (event) => {
   if (!draft || pendingUploads.size) return;
   // Include browser autofill and the latest IME composition when saving.
   for (const key of Object.keys(defaults.text)) draft.text[key] = form.elements.namedItem(key).value;
+  draft.ui.hideEditor = hideEditorCheckbox.checked;
   let next;
   try {
     next = validateStored(draft);
@@ -290,7 +306,7 @@ form.addEventListener("submit", (event) => {
   renderPage();
   draft = null;
   editor.close();
-  notify("已保存到当前浏览器。");
+  notify(current.ui.hideEditor ? "已保存并隐藏编辑入口。再次编辑请点右上角 ⋯。" : "已保存到当前浏览器。");
 });
 
 document.querySelectorAll("[data-open-info]").forEach((button) => {
@@ -302,8 +318,10 @@ document.querySelectorAll("[data-open-info]").forEach((button) => {
 });
 
 infoDialog.addEventListener("close", () => {
-  document.body.classList.remove("dialog-open");
-  triggerButton?.focus({ preventScroll: true });
+  if (!editor.open && !infoDialog.open) {
+    document.body.classList.remove("dialog-open");
+    triggerButton?.focus({ preventScroll: true });
+  }
 });
 
 infoDialog.addEventListener("click", (event) => {
