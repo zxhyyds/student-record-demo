@@ -8,14 +8,15 @@
   <meta name="robots" content="noindex, nofollow">
   <title>学籍档案 · 非官方演示</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css">
-  <script src="./app.js" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=2">
+  <script src="./app.js?v=2" defer></script>
 </head>
 <body>
   <div class="page">
     <header class="page-header">
+      <button class="edit-button" id="open-editor" type="button">编辑</button>
       <div class="page-heading">
-        <h1>学籍档案</h1>
+        <h1 data-field="title">学籍档案</h1>
         <p>非官方演示页面</p>
       </div>
       <button class="about-button" type="button" aria-label="关于此演示页面" data-open-info>
@@ -28,55 +29,91 @@
         <div class="profile-row">
           <div class="photos">
             <figure class="photo-item">
-              <div class="photo-frame admission-photo" role="img" aria-label="录取照片占位图">
+              <div class="photo-frame admission-photo" role="img" aria-label="录取照片占位图" data-photo="admission">
                 <svg viewBox="0 0 54 74" aria-hidden="true"><circle cx="27" cy="27" r="12"/><path d="M7 64v-5c0-11 9-18 20-18s20 7 20 18v5Z"/></svg>
               </div>
-              <figcaption>录取照片</figcaption>
+              <figcaption data-field="admissionCaption">录取照片</figcaption>
             </figure>
             <figure class="photo-item">
-              <div class="photo-frame" role="img" aria-label="学历照片占位图">
+              <div class="photo-frame" role="img" aria-label="学历照片占位图" data-photo="graduation">
                 <svg viewBox="0 0 54 74" aria-hidden="true"><circle cx="27" cy="27" r="12"/><path d="M7 64v-5c0-11 9-18 20-18s20 7 20 18v5Z"/></svg>
               </div>
-              <figcaption>学历照片</figcaption>
+              <figcaption data-field="graduationCaption">学历照片</figcaption>
             </figure>
           </div>
           <div class="identity">
-            <h2>示例同学</h2>
-            <p><span>男</span><time datetime="2000-01-01">2000年01月01日</time></p>
+            <h2 data-field="name">示例同学</h2>
+            <p><span data-field="gender">男</span><span data-field="birthday">2000年01月01日</span></p>
           </div>
         </div>
         <div class="education">
           <div class="school-row">
-            <h3>浙江大学</h3>
-            <span class="degree">硕士研究生</span>
+            <h3 data-field="school">浙江大学</h3>
+            <span class="degree" data-field="degree">硕士研究生</span>
           </div>
-          <p class="major-row"><span>计算机科学与技术</span><span class="study-mode">全日制</span></p>
+          <p class="major-row"><span data-field="major">计算机科学与技术</span><span class="study-mode" data-field="studyMode">全日制</span></p>
         </div>
       </section>
 
       <section class="details" aria-label="学籍详细信息，演示资料">
         <dl>
-          <div class="detail-row"><dt>民族</dt><dd>汉族</dd></div>
-          <div class="detail-row"><dt>证件号码</dt><dd class="id-number" aria-label="证件号码已隐藏">******************</dd></div>
-          <div class="detail-row"><dt>学制</dt><dd>3 年</dd></div>
-          <div class="detail-row"><dt>学历类别</dt><dd>普通高等教育</dd></div>
-          <div class="detail-row"><dt>分院</dt><dd>计算机科学与技术学院</dd></div>
-          <div class="detail-row"><dt>系所</dt><dd>21</dd></div>
-          <div class="detail-row"><dt>班级</dt><dd><span class="sr-only">未填写</span></dd></div>
-          <div class="detail-row"><dt>学号</dt><dd>20240001</dd></div>
-          <div class="detail-row"><dt>入学日期</dt><dd><time datetime="2024-09-06">2024年09月06日</time></dd></div>
-          <div class="detail-row"><dt>学籍状态</dt><dd>在籍（注册学籍）</dd></div>
-          <div class="detail-row"><dt>预计毕业日期</dt><dd><time datetime="2027-06-30">2027年06月30日</time></dd></div>
+          <div class="detail-row"><dt data-field="ethnicityLabel">民族</dt><dd data-field="ethnicity">汉族</dd></div>
+          <div class="detail-row"><dt data-field="idNumberLabel">证件号码</dt><dd class="id-number" data-field="idNumber">******************</dd></div>
+          <div class="detail-row"><dt data-field="durationLabel">学制</dt><dd data-field="duration">3 年</dd></div>
+          <div class="detail-row"><dt data-field="categoryLabel">学历类别</dt><dd data-field="category">普通高等教育</dd></div>
+          <div class="detail-row"><dt data-field="collegeLabel">分院</dt><dd data-field="college">计算机科学与技术学院</dd></div>
+          <div class="detail-row"><dt data-field="departmentLabel">系所</dt><dd data-field="department">21</dd></div>
+          <div class="detail-row"><dt data-field="classNameLabel">班级</dt><dd data-field="className"></dd></div>
+          <div class="detail-row"><dt data-field="studentNumberLabel">学号</dt><dd data-field="studentNumber">20240001</dd></div>
+          <div class="detail-row"><dt data-field="enrollmentLabel">入学日期</dt><dd data-field="enrollment">2024年09月06日</dd></div>
+          <div class="detail-row"><dt data-field="statusLabel">学籍状态</dt><dd data-field="status">在籍（注册学籍）</dd></div>
+          <div class="detail-row"><dt data-field="graduationDateLabel">预计毕业日期</dt><dd data-field="graduationDate">2027年06月30日</dd></div>
         </dl>
       </section>
 
       <div class="report-action">
-        <button class="report-button" type="button" data-open-info>查看验证报告</button>
-        <p class="demo-note">仅供界面演示，不作为学籍或学历证明</p>
+        <button class="report-button" type="button" data-open-info data-field="reportButton">查看验证报告</button>
+        <p class="demo-note" data-field="footerNote">仅供界面演示，不作为学籍或学历证明</p>
         <noscript><p class="noscript-note">本页为非官方演示，没有可供查询的验证报告。</p></noscript>
       </div>
     </main>
   </div>
+
+  <dialog class="editor-dialog" id="editor-dialog" aria-labelledby="editor-title" aria-describedby="editor-description">
+    <form class="editor-form" id="editor-form">
+      <header class="editor-header">
+        <div><h2 id="editor-title">编辑页面</h2><p id="editor-description">照片和文字仅保存在当前浏览器，不会公开上传。</p></div>
+        <button class="editor-dismiss" type="button" aria-label="取消编辑" data-cancel-edit>×</button>
+      </header>
+      <div class="editor-body">
+        <fieldset class="photo-fieldset">
+          <legend>照片</legend>
+          <p class="field-hint">选择照片后自动压缩。支持 JPG、PNG、WebP，每张不超过 20 MB。</p>
+          <div class="upload-grid">
+            <div class="upload-card">
+              <div class="upload-preview" id="admission-preview"><span>暂无照片</span></div>
+              <label class="upload-label" for="admission-file">上传录取照片<input type="file" id="admission-file" accept="image/*" data-upload="admission"></label>
+              <button class="remove-photo" type="button" data-remove="admission">移除照片</button>
+              <p class="photo-status" data-photo-status="admission" role="status" hidden></p>
+            </div>
+            <div class="upload-card">
+              <div class="upload-preview" id="graduation-preview"><span>暂无照片</span></div>
+              <label class="upload-label" for="graduation-file">上传学历照片<input type="file" id="graduation-file" accept="image/*" data-upload="graduation"></label>
+              <button class="remove-photo" type="button" data-remove="graduation">移除照片</button>
+              <p class="photo-status" data-photo-status="graduation" role="status" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+        <div id="editor-fields"></div>
+        <div class="reset-section"><button class="reset-button" type="button" id="reset-draft">恢复初始内容</button><p class="field-hint">点击保存后生效；取消可保留原来的内容。</p></div>
+      </div>
+      <footer class="editor-footer">
+        <p id="editor-status" role="status" aria-live="polite">修改后点击“保存并展示”。</p>
+        <div class="editor-actions"><button class="cancel-button" type="button" data-cancel-edit>取消</button><button class="save-button" type="submit" id="save-edit">保存并展示</button></div>
+      </footer>
+    </form>
+  </dialog>
+  <p class="toast" id="toast" role="status" aria-live="polite" hidden></p>
 
   <dialog class="info-dialog" id="info-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
     <div class="dialog-content">
